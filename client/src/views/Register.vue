@@ -10,11 +10,10 @@
     <div class="logo col-6 d-flex justify-content-center ">
       <img src="../assets/b8dd7b5ee03c4cd2b8a3d7686cbbe29d.png"/>
     </div>
-      <div class="mt-0 pt-0 mb-2 h3">Sign In</div>
       <div class="mb-2 text-muted h6 mb-3" style="font-size: small">
-        Sign In to access your account
+        Register a new account
       </div>
-      <form @submit.prevent="doLogin">
+      <form @submit.prevent="doRegister">
         <label
           for="login-email"
           class="align-self-start mb-2 small"
@@ -22,10 +21,23 @@
           >Email Address</label
         >
         <input
-          v-model="login.email"
+          v-model="register.email"
           type="email"
-          placeholder="your@email.com"
+          placeholder="pandono@email.com"
           id="login-email"
+          class="w-100 p-2 mb-2 rounded border-1"
+        />
+        <label
+          for="login-username"
+          class="align-self-start mb-2 small"
+          style="font-size: small; opacity: 0.9"
+          >Username</label
+        >
+        <input
+          v-model="register.username"
+          type="text"
+          placeholder="pandono"
+          id="login-username"
           class="w-100 p-2 mb-2 rounded border-1"
         />
         <label
@@ -35,7 +47,7 @@
           >Password</label
         >
         <input
-          v-model="login.password"
+          v-model="register.password"
           type="password"
           placeholder="Your Password"
           id="login-password"
@@ -51,9 +63,9 @@
       <div class="d-flex flex-column align-items-center col-8">
         
         <div class="text-muted mt-1 mb-2" style="font-size: small">
-          Don't have an account yet?
+          Already have an account?
 
-          <a href="" @click.prevent="toRegister">Sign Up</a>
+          <a @click.prevent="toLogin" href="">Register</a>
         </div>
       </div>
     </div>
@@ -65,24 +77,25 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Login',
+  name: 'Register',
   components: {
   },
   data() {
     return {
-      login: {
+      register: {
         email: '',
+        username: '',
         password: ''
       }
     }
   },
   methods: {
-    doLogin() {
-      this.$store.dispatch("doLogin", this.login)
+    doRegister() {
+      this.$store.dispatch("doRegister", this.register)
     },
-    toRegister() {
+    toLogin() {
       this.$router.push({
-            name: 'Register'
+            name: 'Login'
           }).catch(err => {
             console.log(`>`, err);
           })
