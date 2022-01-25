@@ -12,9 +12,9 @@
     </div>
       <div class="mt-0 pt-0 mb-2 h3">Sign In</div>
       <div class="mb-2 text-muted h6 mb-3" style="font-size: small">
-        Sign In to access your accountHHEHEHEHEE
+        Sign In to access your account
       </div>
-      <form>
+      <form @submit.prevent="doLogin">
         <label
           for="login-email"
           class="align-self-start mb-2 small"
@@ -22,7 +22,7 @@
           >Email Address</label
         >
         <input
-          
+          v-model="login.email"
           type="email"
           placeholder="your@email.com"
           id="login-email"
@@ -35,6 +35,7 @@
           >Password</label
         >
         <input
+          v-model="login.password"
           type="password"
           placeholder="Your Password"
           id="login-password"
@@ -49,13 +50,7 @@
       </form>
       <div class="d-flex flex-column align-items-center col-8">
         <div class="mb-2 text-muted" style="font-size: small">Or</div>
-        <div class="row flex-wrap align-items-center justify-content-center px-0 w-100 mx-0 mb-2">
-          <div style="font-size: small" class="text-muted col-12 h-5">Sign in with Twitter
-        <a class="col-8 w-50" href="https://www.freepnglogos.com/pics/logo-twitter-png" title="Image from freepnglogos.com"><img style="height:25px; width:25px" src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-logo-vector-png-clipart-1.png" width="200" alt="twitter logo vector png clipart" /></a>
-
-          </div>
-
-        </div>
+        
         <div class="text-muted mt-1 mb-2" style="font-size: small">
           Don't have an account yet?
 
@@ -71,8 +66,21 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Home',
+  name: 'Login',
   components: {
+  },
+  data() {
+    return {
+      login: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    doLogin() {
+      this.$store.dispatch("doLogin", this.login)
+    }
   }
 }
 </script>
