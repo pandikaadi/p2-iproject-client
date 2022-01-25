@@ -8,13 +8,21 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogged: localStorage.access_token,
-    baseUrl: `http://localhost:3000`
+    baseUrl: `http://localhost:3000`,
+    barbers: []
   },
   mutations: {
     COMMIT_LOGGED_IN(state, payload) {
       console.log(payload);
       state.isLogged = payload
-    }
+    },
+    COMMIT_SIGN_OUT(state) {
+      localStorage.clear()
+      state.isLogged = false
+    },
+    COMMIT_BARBERS(state, payload) {
+      state.barbers = payload
+    },
   },
   actions: {
 
@@ -65,6 +73,30 @@ export default new Vuex.Store({
           }).catch(err => {
             console.log(`>`, err);
           })
+        } 
+        
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    },
+    async fetchBarbers({state, commit}, payload) {
+
+      try {
+        
+        const barbers = await axios({
+          method: 'get',
+          url: `${state.baseUrl}/barbers`,
+          params: {
+            city: payload
+          },
+          headers: {
+            access_token: localStorage.access_token
+  
+          },
+        })
+        if(barbers) {
+          console.log(`fetch success`);
+          commit("COMMIT_BARBERS", barbers.data)
         } 
         
       } catch (error) {
