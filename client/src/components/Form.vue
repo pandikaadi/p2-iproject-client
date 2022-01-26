@@ -236,10 +236,8 @@ export default {
           },
         });
         if (barber) {
-          console.log(`fetch success`);
           this.barber = barber.data;
           this.barberLoc = latLng(barber.data.lat, barber.data.long)
-          console.log(this.barber);
           if (this.barber.city === "Jakarta") {
             this.currentCenter = latLng(-6.2, 106.816666);
             this.center = latLng(-6.2, 106.816666);
@@ -247,7 +245,13 @@ export default {
           }
         }
       } catch (error) {
-        console.log(error);
+         Vue.swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     },
     async fetchAppointments() {
@@ -272,7 +276,6 @@ export default {
 
           })
         } else {
-          console.log(`hehehe`);
           this.appointments = {
         1: false,
         2: false,
@@ -283,7 +286,13 @@ export default {
 
         }
       } catch (error) {
-        console.log(error);
+         Vue.swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     },
     async doTask() {
@@ -382,7 +391,7 @@ export default {
     }
   },
   async created() {
-    console.log(this.$route.name);
+    
     if(this.$route.name === 'Edit') {
       await this.$store.dispatch("fetchUserBooking")
       this.user.address = this.userBooking.address
