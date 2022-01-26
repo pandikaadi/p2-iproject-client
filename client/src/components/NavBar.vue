@@ -45,6 +45,14 @@ export default {
       }).catch(failure => {
         console.log(`>>>>>>>>>>>>>>>>>>>`, failure);
       })
+      this.$swal({
+          icon: `success`,
+          title: 'you have been logged out',
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
+
     }
 
   },

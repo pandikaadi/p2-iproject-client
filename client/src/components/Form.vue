@@ -312,9 +312,22 @@ export default {
             }).catch(err => {
               console.log(err);
             })
+            this.$swal({
+          icon: `success`,
+          title: `success create a new booking!`,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
           }
         } catch (error) {
-          console.log(error);
+          this.$swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
           
         }
       } else {
@@ -344,9 +357,22 @@ export default {
             }).catch(err => {
               console.log(err);
             })
+             this.$swal({
+          icon: `success`,
+          title: `success editing booking!`,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
           }
         } catch (error) {
-          console.log(error);
+         this.$swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
           
         }
 
@@ -355,9 +381,10 @@ export default {
       }
     }
   },
-  created() {
+  async created() {
+    console.log(this.$route.name);
     if(this.$route.name === 'Edit') {
-      this.$store.dispatch("fetchUserBooking")
+      await this.$store.dispatch("fetchUserBooking")
       this.user.address = this.userBooking.address
       this.user.schedule = this.userBooking.schedule
       this.appointmentDate = this.userBooking.appointmentDate

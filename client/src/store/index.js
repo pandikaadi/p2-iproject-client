@@ -50,10 +50,23 @@ export default new Vuex.Store({
         });
         if (deleteApp) {
           commit("COMMIT_CANCEL_BOOKING");
+          Vue.swal({
+            icon: `success`,
+            title: `succeeded cancel your booking`,
+            position: `top-end`,
+            showConfirmButton: false,
+            timer: 1500
+          })
           
         }
       } catch (error) {
-        console.log(error.response.data.message);
+        Vue.swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
 
     },
@@ -72,6 +85,13 @@ export default new Vuex.Store({
           localStorage.access_token = loggedUser.data.access_token;
           localStorage.username = loggedUser.data.username;
           dispatch("fetchUserBooking")
+          Vue.swal({
+            icon: `success`,
+            title: 'you have been logged in',
+            position: `top-end`,
+            showConfirmButton: false,
+            timer: 1500
+          })
           router
             .push({
               name: "Home",
@@ -81,7 +101,13 @@ export default new Vuex.Store({
             });
         }
       } catch (error) {
-        console.log(error.response.data.message);
+        Vue.swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     },
     async doRegister({ state }, payload) {
@@ -96,7 +122,13 @@ export default new Vuex.Store({
           },
         });
         if (registeredUser) {
-          console.log(`register success`);
+          Vue.swal({
+            icon: `success`,
+            title: 'register succeeded',
+            position: `top-end`,
+            showConfirmButton: false,
+            timer: 1500
+          })
           router
             .push({
               name: "Login",
@@ -106,7 +138,13 @@ export default new Vuex.Store({
             });
         }
       } catch (error) {
-        console.log(error.response.data.message);
+        Vue.swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     },
     async fetchBarbers({ state, commit }, payload) {
@@ -122,11 +160,16 @@ export default new Vuex.Store({
           },
         });
         if (barbers) {
-          console.log(`fetch success`);
           commit("COMMIT_BARBERS", barbers.data);
         }
       } catch (error) {
-        console.log(error.response.data.message);
+        Vue.swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     },
     async fetchUserLocation({ state, commit }, payload) {
@@ -144,11 +187,16 @@ export default new Vuex.Store({
           },
         });
         if (location) {
-          console.log(`fetch success`);
           commit("COMMIT_LOCATION", location.data);
         }
       } catch (error) {
-        console.log(error.response.data.message);
+        Vue.swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     },
     async fetchUserBooking({ state, commit }) {
@@ -161,7 +209,7 @@ export default new Vuex.Store({
           },
         });
         if (booking.data) {
-          console.log(booking);
+          
           let formattedPrice = booking.data.price.toString().split("");
 
           for (
@@ -175,13 +223,18 @@ export default new Vuex.Store({
           formattedPrice = `Rp. ${formattedPrice.join("")},00`;
           let dateString = new Date(booking.data.appointmentDate).toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }) 
             .substring(0, 9)
-            console.log(booking.data.appointmentDate);
             booking.data.formatted = {formattedPrice, dateString}
           commit("COMMIT_BOOKING", booking.data);
         }
       } catch (error) {
         
-        console.log(error.response.data.message);
+        Vue.swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     },
   },

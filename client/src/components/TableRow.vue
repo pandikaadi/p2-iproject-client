@@ -23,6 +23,8 @@ export default {
     book(page) {
       this.$router.push({
         path: `/book/${page}`
+      }).catch(err => {
+        console.log(err);
       })
 
     }

@@ -209,7 +209,13 @@ export default {
           this.forecast.jakarta = jakartaWeather.data.weather[0].main;
         }
       } catch (error) {
-        console.log(error, `>>>>>>>>>>>`);
+        this.$swal({
+          icon: `error`,
+          title: error.response.data.message,
+          position: `top-end`,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     },
   },

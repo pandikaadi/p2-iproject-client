@@ -65,7 +65,7 @@
         <div class="text-muted mt-1 mb-2" style="font-size: small">
           Already have an account?
 
-          <a @click.prevent="toLogin" href="">Register</a>
+          <a @click.prevent="toLogin" href="">Sign In</a>
         </div>
       </div>
     </div>
