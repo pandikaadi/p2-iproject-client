@@ -6,14 +6,14 @@
 import Form from '../components/Form.vue'
 
 export default {
-  name: "Book",
+  name: "Edit",
   components: {
     Form
     
   },
   data() {
     return {
-      task: 'add',
+      task: 'edit',
       submitText: 'create'
     }
     

@@ -173,11 +173,9 @@ export default new Vuex.Store({
           }
 
           formattedPrice = `Rp. ${formattedPrice.join("")},00`;
-          let dateString = booking.data.appointmentDate
-            .substring(0, 10)
-            .split("-")
-            .reverse()
-            .join("/");
+          let dateString = new Date(booking.data.appointmentDate).toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }) 
+            .substring(0, 9)
+            console.log(booking.data.appointmentDate);
             booking.data.formatted = {formattedPrice, dateString}
           commit("COMMIT_BOOKING", booking.data);
         }
