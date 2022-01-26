@@ -245,7 +245,7 @@ export default {
           }
         }
       } catch (error) {
-         Vue.swal({
+         this.$swal({
           icon: `error`,
           title: error.response.data.message,
           position: `top-end`,
@@ -286,7 +286,7 @@ export default {
 
         }
       } catch (error) {
-         Vue.swal({
+         this.$swal({
           icon: `error`,
           title: error.response.data.message,
           position: `top-end`,
