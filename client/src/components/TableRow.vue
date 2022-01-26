@@ -3,9 +3,9 @@
       <th scope="row">{{index+1}}</th>
       <td>{{barber.name}}</td>
       <td>{{barber.city}}</td>
-      <td><button type="button" class="btn btn-secondary">Book</button></td>
+      <td><button @click.prevent="book(barber.id)" type="button" class="btn btn-secondary">Book</button></td>
       
-    </tr>
+  </tr>
 </template>
 
 <script>
@@ -20,6 +20,13 @@ export default {
 
   },
   methods: {
+    book(page) {
+      this.$router.push({
+        path: `/book/${page}`
+      })
+
+    }
+
 
   },
   

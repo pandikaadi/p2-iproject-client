@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Book from '../views/Book.vue'
 
 Vue.use(VueRouter)
 
@@ -23,12 +24,9 @@ const routes = [
     component: Register
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/book/:barberId',
+    name: 'Book',
+    component: Book  
   }
 ]
 
@@ -40,7 +38,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const access_token = localStorage.access_token
-  console.log(to);
 
   if(to.path == "/login" && access_token) next("/")
   else if(to.path == "/register" && access_token) next("/")
