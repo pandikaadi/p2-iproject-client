@@ -15,11 +15,9 @@ export default new Vuex.Store({
   },
   mutations: {
     COMMIT_LOGGED_IN(state, payload) {
-      console.log(payload);
       state.isLogged = payload;
     },
     COMMIT_SIGN_OUT(state) {
-      console.log(`signoutstate>>>>>>>>`);
       localStorage.clear();
       state.isLogged = false;
       state.userBooking = {},
