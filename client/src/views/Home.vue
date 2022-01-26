@@ -103,7 +103,7 @@
                     <td>{{ userBooking.formatted.formattedPrice }}</td>
                     <td class="row">
                       <div >
-                      <a @click.prevent="" style="font-size:0.8em" class="w-50 mb-1 btn btn-sm btn-light">Edit Booking</a>
+                      <a @click.prevent="editBooking" style="font-size:0.8em" class="w-50 mb-1 btn btn-sm btn-light">Edit Booking</a>
                       </div>
                       <div>
                       <a @click.prevent="cancelBooking" style="font-size:0.8em" class="w-50 btn btn-sm btn-dark">Cancel Booking</a>
@@ -167,6 +167,11 @@ export default {
   methods: {
     fetchBarbers(city) {
       this.$store.dispatch("fetchBarbers", city);
+    },
+    editBooking() {
+      this.$router.push({
+        path: '/edit'
+      })
     },
     cancelBooking() {
       this.$store.dispatch("cancelBooking")
