@@ -249,8 +249,7 @@ export default {
     },
     async fetchAppointments() {
       try {
-        console.log(this.appointmentDate);
-        console.log(this.barber.id);
+        
         const appointments = await axios({
           method: "get",
           url: `${this.$store.state.baseUrl}/appointments`,
