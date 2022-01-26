@@ -27,7 +27,11 @@ const routes = [
     path: '/book/:barberId',
     name: 'Book',
     component: Book  
-  }
+  },
+    {
+      path: '*',
+      redirect: '/'
+    }
 ]
 
 const router = new VueRouter({
