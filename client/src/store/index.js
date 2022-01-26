@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     isLogged: localStorage.access_token,
     baseUrl: `http://localhost:3000`,
-    barbers: []
+    barbers: [],
+    userLocation: '',
   },
   mutations: {
     COMMIT_LOGGED_IN(state, payload) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     COMMIT_BARBERS(state, payload) {
       state.barbers = payload
+    },
+    COMMIT_LOCATION(state, payload) {
+      state.userLocation = payload
     },
   },
   actions: {
@@ -103,6 +107,32 @@ export default new Vuex.Store({
         console.log(error.response.data.message);
       }
     },
+    async fetchUserLocation({state, commit}, payload) {
+      try {
+        console.log(payload.lat, `>>>>>>>>>>>>`);
+        
+        const location = await axios({
+          method: 'post',
+          url: `${state.baseUrl}/translate`,
+          data: {
+            lat: payload.lat,
+            long: payload.long
+          },
+          headers: {
+            access_token: localStorage.access_token
+  
+          },
+        })
+        if(location) {
+          console.log(`fetch success`);
+          commit("COMMIT_LOCATION", location.data)
+        } 
+        
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+
+    }
 
   },
   modules: {
